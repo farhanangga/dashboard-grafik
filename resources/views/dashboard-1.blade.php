@@ -5,267 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Kendaraan</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
     <link rel="icon" href="/img/logo.png">
 </head>
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-white font-sans">
+    <!-- WRAPPER -->
+    <div class="flex h-screen">
 
     <!-- SIDEBAR -->
-    <div class="flex h-screen">
-        <aside class="w-64 bg-white shadow-md hidden md:block">
-            <div class="p-4 flex items-center space-x-2">
-                <img src="/img/logo.png" alt="Logo" class="w-10">
-                <h1 class="font-bold text-lg">KB Samsat</h1>
+    <aside id="sidebar"
+      class="w-64 h-full bg-white shadow-md border border-r-gray-200 transform -translate-x-full md:translate-x-0 fixed md:relative z-40 transition-transform duration-300 ease-in-out">
+      <div class="px-10 py-4 flex items-center justify-between">
+        <img src="/img/logo.png" alt="Logo" class="w-25" />
+      </div>
+      <nav class="mt-2">
+        <ul>
+          <li class="px-6 py-3 bg-blue-500 text-white rounded-md mx-2 my-1">
+            <a href="/" class="block w-full">Identifikasi</a>
+          </li>
+          <li class="px-6 py-3 hover:bg-blue-50 text-gray-700 rounded-md mx-2 my-1">
+            <a href="/dashboard-2" class="block w-full">Registrasi</a>
+          </li>
+          <li class="px-6 py-3 hover:bg-blue-50 text-gray-700 rounded-md mx-2 my-1">
+            <a href="/dashboard-3" class="block w-full">Penerbitan</a>
+          </li>
+          <li class="px-6 py-3 hover:bg-blue-50 text-gray-700 rounded-md mx-2 my-1">
+            <a href="/dashboard-4" class="block w-full">Penindakan</a>
+          </li>
+          <li class="px-6 py-3 hover:bg-blue-50 text-gray-700 rounded-md mx-2 my-1">
+            <a href="/dashboard-5" class="block w-full">Pengaduan</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- OVERLAY MOBILE -->
+    <div id="overlay"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden z-30 md:hidden transition-opacity duration-300 ease-in-out"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 flex flex-col md:ml-0">
+
+      <!-- TOP NAVBAR -->
+      <header class="flex justify-between items-center bg-white px-6 py-4 shadow relative z-20">
+        <!-- HAMBURGER -->
+        <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <h2 class="text-xl font-semibold flex-1 text-center md:text-left">Dashboard / Identifikasi</h2>
+
+        <div class="flex items-center space-x-3">
+          <span class="font-medium">Jaring</span>
+            <div class="bg-gray-200 text-gray-500 rounded-full w-10 h-10 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M12 2a5 5 0 015 5v1a5 5 0 11-10 0V7a5 5 0 015-5zm-7 18a7 7 0 0114 0H5z" clip-rule="evenodd" />
+                </svg>
             </div>
-            <nav class="mt-6">
-                <ul>
-                <!-- Dashboard (Aktif) -->
-                <li class="px-6 py-3 bg-blue-600 text-white rounded-md mx-2 my-1 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9v9a2 2 0 01-2 2h-4a2 2 0 01-2-2v-3H9v3a2 2 0 01-2 2H3a2 2 0 01-2-2v-9z" />
-                    </svg>
-                    <a href="#">Dashboard 1</a>
-                </li>
+        </div>
+      </header>
 
-                <!-- Identifikasi -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2z" />
-                    </svg>
-                    <a href="#">Identifikasi</a>
-                </li>
+        <!-- MAIN BODY -->
+        <main class="p-4 sm:p-6 overflow-y-auto flex-1">
 
-                <!-- User Management -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2h9zm3-10a4 4 0 100-8 4 4 0 000 8z" />
-                    </svg>
-                    <a href="#">User Management</a>
-                </li>
-
-                <!-- Master Data -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <a href="#">Master Data</a>
-                </li>
-
-                <!-- Registrasi -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .88-.39 1.67-1 2.22V17h2v-3.78A3.002 3.002 0 0012 11zM12 5a4 4 0 100 8 4 4 0 000-8z" />
-                    </svg>
-                    <a href="#">Registrasi</a>
-                </li>
-
-                <!-- Penerbitan -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8m-8-4h8M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <a href="#">Penerbitan</a>
-                </li>
-
-                <!-- Penindakan -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 17l3 3m0 0l3-3m-3 3V4m10 8h5v4h-5v-4z" />
-                    </svg>
-                    <a href="#">Penindakan</a>
-                </li>
-
-                <!-- Pengaduan -->
-                <li class="px-6 py-2 hover:bg-gray-100 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5h2m-1 0v10m-6 4h12a2 2 0 002-2V9l-4-4H7a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <a href="#">Pengaduan</a>
-                </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <div class="flex-1 flex flex-col">
-
-            <!-- TOP NAVBAR -->
-            <header class="flex justify-between items-center bg-white px-6 py-4 shadow">
-                <h2 class="text-xl font-semibold">Dashboard / Identifikasi</h2>
-                <div class="flex items-center space-x-3">
-                <span class="font-medium">Budi</span>
-                <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5.121 17.804A9 9 0 1118.879 17.8M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </div>
-                </div>
-            </header>
-
-            <!-- CONTENT AREA -->
-            <main class="p-6 overflow-y-auto">
-                <!-- STAT CARDS -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                <!-- Total Kendaraan Masuk -->
-                <div class="relative bg-white p-5 rounded-xl shadow flex flex-col justify-between">
-                    <div class="w-32 sm:w-36"> <!-- BUNGKUS TEKS DENGAN WIDTH TERBATAS -->
-                    <p class="text-gray-500 text-sm font-medium leading-tight">
-                        Total Kendaraan Masuk
-                    </p>
-                    <h3 class="text-3xl font-extrabold text-gray-800 mt-1">500,689</h3>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-blue-100 text-blue-600 p-2 rounded-lg">
-                    <!-- Icon Masuk -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-                    </svg>
-                    </div>
-                </div>
-
-                <!-- Total Kendaraan Keluar -->
-                <div class="relative bg-white p-5 rounded-xl shadow flex flex-col justify-between">
-                    <div class="w-32 sm:w-36">
-                    <p class="text-gray-500 text-sm font-medium leading-tight">
-                        Total Kendaraan Keluar
-                    </p>
-                    <h3 class="text-3xl font-extrabold text-gray-800 mt-1">40,689</h3>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-green-100 text-green-600 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-                    </svg>
-                    </div>
-                </div>
-
-                <!-- Total Kendaraan Onstay -->
-                <div class="relative bg-white p-5 rounded-xl shadow flex flex-col justify-between">
-                    <div class="w-32 sm:w-36">
-                    <p class="text-gray-500 text-sm font-medium leading-tight">
-                        Total Kendaraan Onstay
-                    </p>
-                    <h3 class="text-3xl font-extrabold text-gray-800 mt-1">10,689</h3>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-yellow-100 text-yellow-600 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M6 2.25h12M6 21.75h12M8.25 2.25v4.5a4.5 4.5 0 0 0 1.32 3.18L12 12l2.43-2.07A4.5 4.5 0 0 0 15.75 6.75v-4.5M8.25 21.75v-4.5a4.5 4.5 0 0 1 1.32-3.18L12 12l2.43 2.07a4.5 4.5 0 0 1 1.32 3.18v4.5" />
-                    </svg>
-                    </div>
-                </div>
-
-                <!-- Total Kendaraan Overstay -->
-                <div class="relative bg-white p-5 rounded-xl shadow flex flex-col justify-between">
-                    <div class="w-32 sm:w-36">
-                    <p class="text-gray-500 text-sm font-medium leading-tight">
-                        Total Kendaraan Overstay
-                    </p>
-                    <h3 class="text-3xl font-extrabold text-gray-800 mt-1">5,689</h3>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-red-100 text-red-600 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                    </svg>
-                    </div>
-                </div>
-                </div>
-
-                <!-- CHARTS GRID -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- KENDARAAN MASUK -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Kendaraan Masuk</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
+            <!-- SUMMARY CARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
+                <div class="relative bg-white p-5 rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <p class="text-gray-500 text-sm font-medium leading-tight">
+                            Total Kendaraan Masuk
+                        </p>
+                        <div class="bg-blue-100 text-gray-800 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                            </svg>
                         </div>
-                        <canvas id="chartMasuk" height="180"></canvas>
                     </div>
-
-                    <!-- KENDARAAN KELUAR -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Kendaraan Keluar</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
-                        </div>
-                        <canvas id="chartKeluar" height="180"></canvas>
-                    </div>
-
-                    <!-- KOMERSIAL EKSISTING MASUK -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Komersial Eksisting Masuk</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
-                        </div>
-                        <canvas id="chartKMasuk" height="180"></canvas>
-                    </div>
-
-                    <!-- KOMERSIAL EKSISTING KELUAR -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Komersial Eksisting Keluar</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
-                        </div>
-                        <canvas id="chartKKeluar" height="180"></canvas>
-                    </div>
-
-                    <!-- KENDARAAN ON STAY -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Kendaraan On Stay</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
-                        </div>
-                        <canvas id="chartOnStay" height="180"></canvas>
-                    </div>
-
-                    <!-- KENDARAAN OVER STAY -->
-                    <div class="bg-white p-6 rounded-2xl shadow">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-semibold text-gray-800">Kendaraan Over Stay</h4>
-                            <div class="flex space-x-2 text-sm">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
-                                <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
-                            </div>
-                        </div>
-                        <canvas id="chartOverStay" height="180"></canvas>
-                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mt-auto pt-2">500,689</h3>
                 </div>
 
-            </main>
+                <div class="relative bg-white p-5 rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <p class="text-gray-500 text-sm font-medium leading-tight">
+                            Total Kendaraan Keluar
+                        </p>
+                        <div class=" top-4 right-4 bg-green-100 text-gray-800 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mt-auto pt-2">40,689</h3>
+                </div>
+
+                <div class="relative bg-white p-5 rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <p class="text-gray-500 text-sm font-medium leading-tight">
+                            Total Kendaraan Onstay
+                        </p>
+                        <div class=" top-4 right-4 bg-yellow-100 text-gray-800 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 2.25h12M6 21.75h12M8.25 2.25v4.5a4.5 4.5 0 0 0 1.32 3.18L12 12l2.43-2.07A4.5 4.5 0 0 0 15.75 6.75v-4.5M8.25 21.75v-4.5a4.5 4.5 0 0 1 1.32-3.18L12 12l2.43 2.07a4.5 4.5 0 0 1 1.32 3.18v4.5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mt-auto pt-2">10,689</h3>
+                </div>
+
+                <div class="relative bg-white p-5 rounded-xl shadow-[0_2px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <p class="text-gray-500 text-sm font-medium leading-tight">
+                            Total Kendaraan Overstay
+                        </p>
+                        <div class=" top-4 right-4 bg-red-100 text-gray-800 p-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mt-auto pt-2">5,689</h3>
+                </div>
+            </div>
+
+            <!-- CHARTS GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <!-- CHART TEMPLATE -->
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Kendaraan Masuk</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="chartMasuk" height="180"></canvas>
+            </div>
+
+            <!-- salin struktur di atas untuk chart lainnya -->
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Kendaraan Keluar</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="chartKeluar" height="180"></canvas>
+            </div>
+
+            <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Komersial Eksisting Masuk</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="komersialEMasuk" height="180"></canvas>
+            </div><div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Komersial Eksisting Keluar</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="komersialEKeluar" height="180"></canvas>
+            </div><div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Kendaraan On Stay</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="chartOnStay" height="180"></canvas>
+            </div><div class="bg-white p-5 sm:p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h4 class="font-semibold text-gray-800 text-base sm:text-lg">Kendaraan Overstay</h4>
+                <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
+                    <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
+                </div>
+                </div>
+                <canvas id="chartOverStay" height="180"></canvas>
+            </div>
+            </div>
+        </main>
         </div>
     </div>
+</div>
+    <!-- JS HAMBURGER -->
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const menuBtn = document.getElementById("menu-btn");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("-translate-x-full");
+      overlay.classList.toggle("hidden");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.add("-translate-x-full");
+      overlay.classList.add("hidden");
+    });
+  </script>
 <script>
 const labels = ["11/08/25","12/08/25","13/08/25","14/08/25","15/08/25","16/08/25","17/08/25"];
 
-// 🔹 Opsi global chart
 const chartOptions = {
     responsive: true,
     plugins: {
@@ -273,9 +240,9 @@ const chartOptions = {
             display: true,
             position: 'bottom',
             labels: {
-                usePointStyle: true, // ✅ ubah kotak jadi lingkaran
+                usePointStyle: true, 
                 pointStyle: 'circle',
-                boxWidth: 8,
+                boxWidth: 6,
                 padding: 15
             }
         },
@@ -326,82 +293,165 @@ const chartOptions = {
     }
 };
 
-// 🔹 Opsi khusus grafik batang
 const barChartOptions = {
     ...chartOptions,
     elements: {
         bar: {
             borderRadius: 3,
-            barThickness: 8,
-            maxBarThickness: 12,
         }
     }
 };
 
-// --- KENDARAAN MASUK ---
 new Chart(document.getElementById("chartMasuk"), {
-    type: "bar",
-    data: {
-        labels,
-        datasets: [
-            { label: " Plat DK", data: [14000,16000,6000,15000,13000,17000,21000], backgroundColor: "#1D4ED8" },
-            { label: " Plat Non DK", data: [11000,12000,22000,8000,14000,11000,10000], backgroundColor: "#10B981" }
-        ]
-    },
-    options: barChartOptions
+  type: "bar",
+  data: {
+    labels,
+    datasets: [
+      {
+        label: "Plat DK",
+        data: [14000,16000,6000,15000,13000,17000,21000],
+        backgroundColor: "#0095FF",
+        barThickness: "flex", 
+        categoryPercentage: 0.6,  
+        barPercentage: 0.7       
+      },
+      {
+        label: "Plat Non DK",
+        data: [11000,12000,22000,8000,14000,11000,10000],
+        backgroundColor: "#00E096",
+        barThickness: "flex",
+        categoryPercentage: 0.6,
+        barPercentage: 0.7
+      }
+    ]
+  },
+  options: {
+    ...barChartOptions,
+    scales: {
+      x: {
+        offset: true, 
+        grid: { display: false }
+      },
+      y: barChartOptions.scales.y
+    }
+  }
 });
 
-// --- KENDARAAN KELUAR ---
 new Chart(document.getElementById("chartKeluar"), {
-    type: "bar",
-    data: {
-        labels,
-        datasets: [
-            { label: " Plat DK", data: [14000,16000,6000,15000,13000,17000,21000], backgroundColor: "#1D4ED8" },
-            { label: " Plat Non DK", data: [11000,12000,22000,8000,14000,11000,10000], backgroundColor: "#10B981" }
-        ]
-    },
-    options: barChartOptions
+  type: "bar",
+  data: {
+    labels,
+    datasets: [
+      {
+        label: "Plat DK",
+        data: [14000,16000,6000,15000,13000,17000,21000],
+        backgroundColor: "#0095FF",
+        barThickness: "flex", 
+        categoryPercentage: 0.6,  
+        barPercentage: 0.7        
+      },
+      {
+        label: "Plat Non DK",
+        data: [11000,12000,22000,8000,14000,11000,10000],
+        backgroundColor: "#00E096",
+        barThickness: "flex",
+        categoryPercentage: 0.6,
+        barPercentage: 0.7
+      }
+    ]
+  },
+  options: {
+    ...barChartOptions,
+    scales: {
+      x: {
+        offset: true, 
+        grid: { display: false }
+      },
+      y: barChartOptions.scales.y
+    }
+  }
 });
 
-// --- KOMERSIAL EKSISTING MASUK ---
-new Chart(document.getElementById("chartKMasuk"), {
-    type: "bar",
-    data: {
-        labels,
-        datasets: [
-            { label: " Plat DK", data: [13000,12000,24000,11000,15000,18000,14000], backgroundColor: "#FACC15" },
-            { label: " Plat Non DK", data: [10000,8000,23000,7000,13000,16000,11000], backgroundColor: "#EF4444" }
-        ]
-    },
-    options: barChartOptions
+new Chart(document.getElementById("komersialEMasuk"), {
+  type: "bar",
+  data: {
+    labels,
+    datasets: [
+      {
+        label: "Plat DK",
+        data: [14000,16000,6000,15000,13000,17000,21000],
+        backgroundColor: "#FFC800",
+        barThickness: "flex", 
+        categoryPercentage: 0.6, 
+        barPercentage: 0.7        
+      },
+      {
+        label: "Plat Non DK",
+        data: [11000,12000,22000,8000,14000,11000,10000],
+        backgroundColor: "#FF0000",
+        barThickness: "flex",
+        categoryPercentage: 0.6,
+        barPercentage: 0.7
+      }
+    ]
+  },
+  options: {
+    ...barChartOptions,
+    scales: {
+      x: {
+        offset: true, 
+        grid: { display: false }
+      },
+      y: barChartOptions.scales.y
+    }
+  }
 });
 
-// --- KOMERSIAL EKSISTING KELUAR ---
-new Chart(document.getElementById("chartKKeluar"), {
-    type: "bar",
-    data: {
-        labels,
-        datasets: [
-            { label: " Plat DK", data: [13000,12000,24000,11000,15000,18000,14000], backgroundColor: "#FACC15" },
-            { label: " Plat Non DK", data: [10000,8000,23000,7000,13000,16000,11000], backgroundColor: "#EF4444" }
-        ]
-    },
-    options: barChartOptions
+new Chart(document.getElementById("komersialEKeluar"), {
+  type: "bar",
+  data: {
+    labels,
+    datasets: [
+      {
+        label: "Plat DK",
+        data: [14000,16000,6000,15000,13000,17000,21000],
+        backgroundColor: "#FFC800",
+        barThickness: "flex", 
+        categoryPercentage: 0.6,  
+        barPercentage: 0.7        
+      },
+      {
+        label: "Plat Non DK",
+        data: [11000,12000,22000,8000,14000,11000,10000],
+        backgroundColor: "#FF0000",
+        barThickness: "flex",
+        categoryPercentage: 0.6,
+        barPercentage: 0.7
+      }
+    ]
+  },
+  options: {
+    ...barChartOptions,
+    scales: {
+      x: {
+        offset: true, 
+        grid: { display: false }
+      },
+      y: barChartOptions.scales.y
+    }
+  }
 });
 
-// 🔹 Fungsi bantu: buat gradient dinamis sampai bawah
 function createGradient(ctx, color) {
     const chartArea = ctx.chart?.chartArea;
-    if (!chartArea) return color; // fallback kalau chart belum dirender
+    if (!chartArea) return color; 
 
     const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-    gradient.addColorStop(0, color); // warna utama di atas
-    gradient.addColorStop(1, "rgba(255,255,255,0)"); // transparan total di bawah
+    gradient.addColorStop(0, color); 
+    gradient.addColorStop(1, "rgba(255,255,255,0)"); 
     return gradient;
 }
 
-// --- KENDARAAN ON STAY ---
 new Chart(document.getElementById("chartOnStay").getContext("2d"), {
     type: "line",
     data: {
@@ -411,28 +461,27 @@ new Chart(document.getElementById("chartOnStay").getContext("2d"), {
                 label: " Registrasi",
                 data: [18000,15000,4000,6000,8000,9000,13000],
                 fill: true,
-                backgroundColor: (context) => createGradient(context.chart.ctx, "rgba(59, 131, 246, 0.2)"),
-                borderColor: "#2563EB",
+                backgroundColor: (context) => createGradient(context.chart.ctx, "#009DFF51"),
+                borderColor: "#0095FF",
                 tension: 0.4,
                 pointRadius: 4,
-                pointBackgroundColor: "#2563EB",
+                pointBackgroundColor: "#0095FF",
             },
             {
                 label: " Non Registrasi",
                 data: [20000,17000,9000,13000,15000,16000,21000],
                 fill: true,
-                backgroundColor: (context) => createGradient(context.chart.ctx, "rgba(16,185,129,0.2)"),
-                borderColor: "#10B981",
+                backgroundColor: (context) => createGradient(context.chart.ctx, "#00E09653"),
+                borderColor: "#07E098",
                 tension: 0.4,
                 pointRadius: 4,
-                pointBackgroundColor: "#10B981",
+                pointBackgroundColor: "#07E098",
             }
         ]
     },
     options: chartOptions
 });
 
-// --- KENDARAAN OVER STAY ---
 new Chart(document.getElementById("chartOverStay").getContext("2d"), {
     type: "line",
     data: {
@@ -442,28 +491,27 @@ new Chart(document.getElementById("chartOverStay").getContext("2d"), {
                 label: " Registrasi",
                 data: [10000,9000,2000,5000,7000,8000,10000],
                 fill: true,
-                backgroundColor: (context) => createGradient(context.chart.ctx, "rgba(59,131,246,0.2)"),
-                borderColor: "#2563EB",
+                backgroundColor: (context) => createGradient(context.chart.ctx, "#009DFF51"),
+                borderColor: "#0095FF",
                 tension: 0.4,
                 pointRadius: 4,
-                pointBackgroundColor: "#2563EB",
+                pointBackgroundColor: "#0095FF",
             },
             {
                 label: " Non Registrasi",
                 data: [18000,16000,9000,12000,14000,15000,20000],
                 fill: true,
-                backgroundColor: (context) => createGradient(context.chart.ctx, "rgba(16,185,129,0.2)"),
-                borderColor: "#10B981",
+                backgroundColor: (context) => createGradient(context.chart.ctx, "#00E09653"),
+                borderColor: "#07E098",
                 tension: 0.4,
                 pointRadius: 4,
-                pointBackgroundColor: "#10B981",
+                pointBackgroundColor: "#07E098",
             }
         ]
     },
     options: chartOptions
 });
 </script>
-
 
 </body>
 </html>
