@@ -129,7 +129,7 @@
                     <div class="bg-white p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="font-semibold text-gray-800">Kendaraan Non Registrasi</h4>
-                            <div class="flex space-x-2 text-sm">
+                            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
                                 <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
@@ -142,7 +142,7 @@
                     <div class="bg-white p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="font-semibold text-gray-800">Kendaraan Belum Ditindak</h4>
-                            <div class="flex space-x-2 text-sm">
+                            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
                                 <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
@@ -155,7 +155,7 @@
                     <div class="bg-white p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="font-semibold text-gray-800">Penindakan Surat Peringatan</h4>
-                            <div class="flex space-x-2 text-sm">
+                            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
                                 <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
@@ -168,7 +168,7 @@
                     <div class="bg-white p-6 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="font-semibold text-gray-800">Penindakan Surat Tilang</h4>
-                            <div class="flex space-x-2 text-sm">
+                            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
                                 <button class="bg-blue-600 text-white px-3 py-1 rounded-full">7 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">14 Hari</button>
                                 <button class="border px-3 py-1 rounded-full text-gray-600">1 Bulan</button>
